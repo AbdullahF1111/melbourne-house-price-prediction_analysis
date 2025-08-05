@@ -36,7 +36,15 @@ A complete data science and ML project on Melbourne housing prices, covering EDA
 ### 1️⃣ Data Cleaning
 - ❌ Removed duplicates & missing values  
 - 📏 Treated outliers in key features (Landsize, BuildingArea, etc.)
-
+- Removed rows with:
+  - `Distance of city center = 0`
+  - `Bathroom = 0` or ≥ 6
+  - `Rooms < 2` or ≥ 6
+  - `Car > 5`
+  - `Landsize < 10` or > 2000(m)
+- Dropped missing values
+- Removed rare regions: 'Eastern Victoria', etc.
+- 
 ### 2️⃣ Exploratory Data Analysis (EDA)
 
 Key Features Investigated:
