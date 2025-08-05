@@ -31,20 +31,42 @@ A complete data science and ML project on Melbourne housing prices, covering EDA
 
 ---
 
+### **1️⃣ Data Cleaning & Preprocessing**
+
+* **Handling Missing Values:**
+  * We started by removing rows with an excessive number of missing values and dropping any remaining rows with missing data in key features.
+  * This ensures our analysis is based on a complete and reliable dataset.
+
+* **Outlier & Sanity Check:**
+  * We performed a logical check to remove outliers and unrealistic data points that could negatively impact the model's performance.
+  * **Distance:** Removed rows where `Distance` was 0, as this is a data entry error.
+  * **Rooms:** Filtered out properties with fewer than 2 rooms or more than 6 rooms, representing rare and non-standard housing types.
+  * **Bathroom:** Excluded properties with 0 bathrooms or more than 5, as these are considered outliers for residential properties.
+  * **Car:** Removed rows with more than 5 car spots, which are statistically rare and not representative of the majority of the data.
+  * **Landsize:** Filtered `Landsize` to a realistic range (10m² to 2000m²) to exclude errors and extreme values.
+
+* **Categorical Data Filtering:**
+  * To improve model robustness, we removed regions that had a very low number of occurrences in the dataset, such as 'Eastern Victoria', as they do not provide a strong signal for the model to learn from.
+
 ## 🔍 Workflow
 
-### 1️⃣ Data Cleaning
-- ❌ Removed duplicates & missing values  
-- 📏 Treated outliers in key features (Landsize, BuildingArea, etc.)
-- Removed rows with:
-  - `Distance of city center = 0`
-  - `Bathroom = 0 or ≥ 6`
-  - `Rooms < 2 or ≥ 6`
-  - `Car > 5`
-  - `Landsize < 10 or > 2000(m)`
-- Dropped missing values
-- Removed rare regions: 'Eastern Victoria', etc.
-- 
+### **1️⃣ Data Cleaning & Preprocessing**
+
+* **Handling Missing Values:**
+  * We started by removing rows with an excessive number of missing values and dropping any remaining rows with missing data in key features.
+  * This ensures our analysis is based on a complete and reliable dataset.
+
+* **Outlier & Sanity Check:**
+  * We performed a logical check to remove outliers and unrealistic data points that could negatively impact the model's performance.
+  * **Distance:** Removed rows where `Distance` was 0, as this is a data entry error.
+  * **Rooms:** Filtered out properties with fewer than 2 rooms or more than 6 rooms, representing rare and non-standard housing types.
+  * **Bathroom:** Excluded properties with 0 bathrooms or more than 5, as these are considered outliers for residential properties.
+  * **Car:** Removed rows with more than 5 car spots, which are statistically rare and not representative of the majority of the data.
+  * **Landsize:** Filtered `Landsize` to a realistic range (10m² to 2000m²) to exclude errors and extreme values.
+
+* **Categorical Data Filtering:**
+  * To improve model robustness, we removed regions that had a very low number of occurrences in the dataset, such as 'Eastern Victoria', as they do not provide a strong signal for the model to learn from.
+
 ### 2️⃣ Exploratory Data Analysis (EDA)
 
 Key Features Investigated:
