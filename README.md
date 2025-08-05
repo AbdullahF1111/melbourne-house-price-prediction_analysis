@@ -39,7 +39,7 @@ A complete data science and ML project on Melbourne housing prices, covering EDA
 - Removed rows with:
   - `Distance of city center = 0`
   - `Bathroom = 0 or ≥ 6`
-  - `Rooms < 2` or ≥ 6`
+  - `Rooms < 2 or ≥ 6`
   - `Car > 5`
   - `Landsize < 10 or > 2000(m)`
 - Dropped missing values
