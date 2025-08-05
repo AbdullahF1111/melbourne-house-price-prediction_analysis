@@ -1,6 +1,6 @@
 # 🏠 Melbourne Housing Price Analysis & Prediction
 
-A complete end-to-end data science project on Melbourne housing prices, covering EDA, data cleaning, feature engineering, and predictive modeling using Random Forest and XGBoost, with explainability via SHAP — all aimed at understanding key pricing factors and building an accurate price prediction model.
+A complete data science and ML project on Melbourne housing prices, covering EDA, data cleaning, feature engineering, and predictive modeling using Random Forest and XGBoost, with explainability via SHAP — all aimed at understanding key pricing factors and building an accurate price prediction model.
 
 ## 📌 Objectives
 
