@@ -1,8 +1,7 @@
 # 🏠 Melbourne Housing Price Analysis & Prediction
 
-A complete end-to-end data science project to analyze and predict housing prices in Melbourne, Australia 🇦🇺.  
-The project involves data analysis, feature engineering, machine learning modeling, and model explainability using SHAP, with an optional deployment via Streamlit.
-
+This project is a comprehensive case study on the Melbourne housing dataset, aiming to analyze the key factors influencing property prices and build a robust machine learning model for price prediction. The project combines all stages of a data science workflow, from Exploratory Data Analysis (EDA) and data preprocessing to building and interpreting powerful predictive models using algorithms like Random Forest and XGBoost, with advanced explainability via SHAP.
+A complete end-to-end data project that combines data analysis, machine learning, and Python visualization to analyze and predict house prices in Melbourne, Australia 🇦🇺
 ---
 
 ## 📌 Objectives
