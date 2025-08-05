@@ -87,8 +87,9 @@ Notable Findings:
 - 🏘 Type matters: House > Unit > Townhouse
 
 ### 3️⃣ Feature Engineering
-- 🧮 Categorical encoding (e.g., Type, Regionname)
-- ✅ Selected top 7 impactful features based on EDA & model importance
+-  Categorical encoding (e.g., Type, Regionname)
+-  Selected top 7 impactful features based on EDA & model importance
+-  Delete features like(YearBuilt,BuildingArea..) because have alot of null values
 
 ### 4️⃣ Modeling
 - 📦 Trained and evaluated models:
