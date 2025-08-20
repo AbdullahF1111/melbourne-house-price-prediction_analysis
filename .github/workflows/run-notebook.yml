@@ -1,0 +1,34 @@
+name: Run Notebook
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-jupyter-notebook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v3
+
+    - name: Set up Python environment
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install jupyter nbconvert ipykernel
+
+    - name: Run the Jupyter Notebook
+      run: |
+        # تأكد من أن هذا المسار يطابق تمامًا اسم ملف الـ Notebook الخاص بك
+        jupyter nbconvert --to notebook --execute "notebooks/melbourne_house_price_analysis_prediction.ipynb" --output "notebooks/executed_notebook.ipynb"
+        
+    - name: Success message
+      run: echo "The notebook ran successfully without errors!"
