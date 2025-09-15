@@ -27,8 +27,7 @@ jobs:
 
     - name: Run the Jupyter Notebook
       run: |
-        # تأكد من أن هذا المسار يطابق تمامًا اسم ملف الـ Notebook الخاص بك
         jupyter nbconvert --to notebook --execute "notebooks/melbourne_house_price_analysis_prediction.ipynb" --output "notebooks/executed_notebook.ipynb"
         
     - name: Success message
-      run: echo "The notebook ran successfully without errors!"
+      run: echo "✅ The notebook ran successfully without errors!"
