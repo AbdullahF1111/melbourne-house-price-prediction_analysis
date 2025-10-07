@@ -6,7 +6,9 @@ import shap
 import matplotlib.pyplot as plt
 
 # Load model and feature names
-model = joblib.load("house_price_model.joblib")
+import os
+model_path = os.path.join(os.path.dirname(__file__), "..", "model", "house_price_model.joblib")
+model = joblib.load(model_path)
 
 # Define feature list (must match training)
 training_columns = ['Rooms', 'Bathroom', 'Car', 'Landsize', 'Distance',
