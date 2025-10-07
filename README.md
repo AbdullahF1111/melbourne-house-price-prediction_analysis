@@ -8,7 +8,7 @@ A complete data science and ML project on Melbourne housing prices, covering EDA
 - 📊 Analyze real estate market trends in Melbourne  
 - 🧠 Identify key features influencing property prices  
 - 🤖 Build accurate ML models for price prediction  
-- 🌐 (Optional) Deploy a user-friendly prediction interface using Streamlit
+- 🌐 Deploy a user-friendly prediction & analysis interface using Streamlit
 
 ---
 
