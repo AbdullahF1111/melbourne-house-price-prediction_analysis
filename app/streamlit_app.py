@@ -36,7 +36,11 @@ st.set_page_config(page_title="🏠 Melbourne Housing Price Predictor", layout="
 
 st.title("🏠 Melbourne Housing Price Analysis & Prediction App")
 st.markdown("""
-This app lets you **analyze** and **predict** house prices in Melbourne using a trained **XGBoost model**.
+Welcome to the **Melbourne Housing Price Prediction Dashboard**!  
+This interactive tool allows you to:
+- Input property details to **predict house prices**
+- Explore **feature impacts and correlations**
+- Understand model explainability using **SHAP analysis**
 """)
 
 # =========================
@@ -54,6 +58,7 @@ property_type = st.sidebar.selectbox("Property Type", ["House", "Unit", "Townhou
 region = st.sidebar.selectbox("Region", [
     "Northern Metropolitan",
     "South-Eastern Metropolitan",
+    "Southern Metropolitan",
     "Western Metropolitan"
 ])
 
@@ -70,6 +75,7 @@ input_data = {
     "Type_u": 1 if property_type == "Unit" else 0,
     "Regionname_Northern Metropolitan": 1 if region == "Northern Metropolitan" else 0,
     "Regionname_South-Eastern Metropolitan": 1 if region == "South-Eastern Metropolitan" else 0,
+    "Regionname_Southern Metropolitan": 1 if region == "Southern Metropolitan" else 0,
     "Regionname_Western Metropolitan": 1 if region == "Western Metropolitan" else 0,
 }
 
@@ -100,48 +106,88 @@ with col1:
 # =========================
 # Load and Show Images Safely
 # =========================
-IMAGE_DIR = "images"
-IMAGE_categorical = "categorical features.png"
-IMAGE_numerical = "numerical features.png"
-IMAGE_feature = "feature impact.png"
-IMAGE_shapehouseprice = "shape houseprice.png"
-IMAGE_shapelandsizedistance = "shape landsize & distance.png"
-Path_categorical = os.path.join(IMAGE_DIR, IMAGE_categorical)
-Path_numerical = os.path.join(IMAGE_DIR, IMAGE_numerical)
-Path_feature = os.path.join(IMAGE_DIR, IMAGE_feature)
-Path_shapehouseprice = os.path.join(IMAGE_DIR, IMAGE_shapehouseprice)
-Path_shapelandsizedistance = os.path.join(IMAGE_DIR, IMAGE_shapelandsizedistance)
+image_dir = os.path.join(os.path.dirname(__file__), "..", "images")
 
-#image_dir = os.path.join(os.path.dirname(__file__), "..", "images")
-#cat_img = os.path.join(image_dir, "cat_features.png")
-#land_img = os.path.join(image_dir, "ca9df0c7-b8a3-4628-a6fe-b763c34093ca.png")
-#impact_img = os.path.join(image_dir, "f9a7203b-0e6e-493b-8e9d-be60e9c32106.png")
+image_files = {
+    "categorical": "categorical features.png",
+    "numerical": "numerical features.png",
+    "feature": "feature impact.png",
+    "shapehouseprice": "shape houseprice.png",
+    "shapelandsizedistance": "shape landsize & distance.png"
+}
 
-with col2:
-    if os.path.exists(Path_categorical):
-        st.image(Path_categorical, caption="Categorical Feature Analysis", use_container_width=True)
+def safe_show_image(path, caption, explanation):
+    """Safely display image or fallback plot with text."""
+    if os.path.exists(path):
+        st.image(path, caption=caption, use_container_width=True)
+        st.caption(explanation)
     else:
-        st.info("Categorical feature image not found.")
+        st.warning(f"⚠️ Image not found: {os.path.basename(path)} — showing placeholder.")
+        fig, ax = plt.subplots()
+        ax.text(0.5, 0.5, "Image Not Found", fontsize=16, ha='center', va='center')
+        ax.axis("off")
+        st.pyplot(fig)
+        st.caption(explanation)
 
-st.markdown("### 📉 Exploratory Analysis")
+# =========================
+# Analytical Visualizations Section
+# =========================
+st.markdown("## 📈 Exploratory Data Analysis (EDA)")
+
+st.markdown("Below are visual insights that explain how various features relate to house prices in Melbourne:")
+
+# --- Numerical relationships
+st.markdown("### 🔹 Numerical Features and Price Relationships")
+safe_show_image(
+    os.path.join(image_dir, image_files["numerical"]),
+    caption="Relationships Between Numerical Features and House Price",
+    explanation="This figure shows how price correlates with Landsize, Distance, Rooms, and Bathrooms. "
+                "Generally, larger landsize and more rooms increase the price, while distance from city lowers it."
+)
+
+# --- SHAP & Feature impact
+st.markdown("### 🔹 SHAP Value & Feature Importance Analysis")
 col1, col2 = st.columns(2)
+with col1:
+    safe_show_image(
+        os.path.join(image_dir, image_files["shapelandsizedistance"]),
+        caption="Landsize and Distance SHAP Analysis",
+        explanation="This visualization shows the SHAP values of Landsize and Distance. "
+                    "Larger Landsize contributes positively, while longer distances reduce predicted prices."
+    )
+with col2:
+    safe_show_image(
+        os.path.join(image_dir, image_files["feature"]),
+        caption="Categorical Features Impact",
+        explanation="SHAP summary showing how region and property type influence the prediction."
+    )
 
-#if os.path.exists(Path_shapelandsizedistance):
-   # col1.image(Path_shapelandsizedistance, caption="Landsize vs SHAP Values", use_container_width=True)
-if os.path.exists(Path_feature):
-    col2.image(Path_feature, caption="Categorical Features Impact", use_container_width=True)
+# --- Categorical distributions
+st.markdown("### 🔹 Categorical Features Analysis")
+safe_show_image(
+    os.path.join(image_dir, image_files["categorical"]),
+    caption="Categorical Feature Distribution and Their Effect on Price",
+    explanation="This plot illustrates how different property types and regions contribute to the price distribution."
+)
+
+# --- House price shape distribution
+st.markdown("### 🔹 Price Distribution Overview")
+safe_show_image(
+    os.path.join(image_dir, image_files["shapehouseprice"]),
+    caption="Distribution of Melbourne House Prices",
+    explanation="This figure represents the distribution of house prices — showing that most properties "
+                "fall within the median range, while a few luxury properties skew the upper tail."
+)
 
 # =========================
 # SHAP Explainability
 # =========================
-st.markdown("### 🧠 Model Explainability (SHAP Analysis)")
-
+st.markdown("## 🧠 Model Explainability (SHAP Analysis)")
 try:
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_new)
-
-    st.write("Feature Impact Visualization:")
+    st.write("Feature Importance (SHAP Summary):")
     shap.summary_plot(shap_values, X_new, plot_type="bar", show=False)
     st.pyplot(bbox_inches="tight")
-except Exception as e:
-    st.info("SHAP visualization skipped (requires full model context).")
+except Exception:
+    st.info("SHAP visualization skipped (requires local model compatibility).")
