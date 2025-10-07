@@ -1,6 +1,7 @@
 # 🏠 Melbourne Housing Price Analysis & Prediction
 
 “Melbourne House Price Prediction — an end-to-end data analysis and machine learning project built in Python (Pandas, Scikit-learn, XGBoost). It covers data cleaning, EDA, feature engineering, model training, and SHAP-based explainability, with deployment via Streamlit and Colab.”
+---
 
 A complete data science project analyzing Melbourne housing prices, featuring exploratory data analysis (EDA), preprocessing, predictive modeling (Random Forest & XGBoost), and model interpretation with SHAP. The project highlights key price drivers and delivers an accurate, interpretable prediction model.
 
