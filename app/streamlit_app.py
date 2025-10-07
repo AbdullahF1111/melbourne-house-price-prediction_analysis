@@ -52,8 +52,15 @@ new_data = {
 }
 
 # Reindex and predict
-X_new = pd.DataFrame([new_data], columns=training_columns)
+# Make sure the input matches the training columns
+X_new = pd.DataFrame([input_data])
+
+# Reindex to match the model’s training features
+X_new = X_new.reindex(columns=training_columns, fill_value=0)
+
+# Now safely predict
 pred_price = model.predict(X_new)[0]
+
 
 st.subheader("💰 Predicted House Price")
 st.success(f"Estimated Price: **${pred_price:,.0f} AUD**")
