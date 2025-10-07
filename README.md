@@ -20,7 +20,7 @@ A complete data science and ML project on Melbourne housing prices, covering EDA
 | Libraries       | pandas, numpy, matplotlib, seaborn, scikit-learn, xgboost |
 | ML Models       | Linear Regression, Random Forest, XGBoost                |
 | Visualization   | seaborn, matplotlib, SHAP                                |
-| Deployment      | Streamlit (optional)                                     |
+| Deployment      | Streamlit                                      |
 | Version Control | Git & GitHub                                             |
 
 ---
