@@ -1,25 +1,15 @@
-name: Run Jupyter Notebook
-
-on:
-  workflow_dispatch:  # يسمح لك بتشغيله يدويًا من واجهة GitHub
-
-jobs:
-  execute-notebook:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-
-    - name: Install dependencies
-      run: |
-        pip install pandas numpy matplotlib seaborn missingno jupyter nbconvert
-
-    - name: Run notebook
-      run: |
-        jupyter nbconvert --to notebook --execute "notebooks/melbourne_house_price_analysis_prediction.ipynb" --output "notebooks/executed_notebook.ipynb"
+name: melbourne-house-price-analysis
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - pandas
+      - numpy
+      - seaborn
+      - matplotlib
+      - scikit-learn
+      - xgboost
+      - shap
+      - streamlit
+      - joblib
+      - jupyter
