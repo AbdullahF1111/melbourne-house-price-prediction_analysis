@@ -39,11 +39,12 @@ st.markdown("""
 Welcome to the **Melbourne Housing Price Prediction Dashboard**!  
 Use this app to analyze and predict house prices using an **XGBoost model** trained on Melbourne’s property dataset.
 """)
+
 st.markdown("---")
 st.markdown(
     "🔗 **View the full project on GitHub:** [Melbourne House Price Prediction](https://github.com/abdullahf1111/melbourne-house-price-prediction_analysis)"
 )
-
+st.markdown("---")
 # =========================
 # Sidebar Inputs
 # =========================
