@@ -110,7 +110,7 @@ Path_categorical = os.path.join(IMAGE_DIR, IMAGE_categorical)
 Path_numerical = os.path.join(IMAGE_DIR, IMAGE_numerical)
 Path_feature = os.path.join(IMAGE_DIR, IMAGE_feature)
 Path_shapehouseprice = os.path.join(IMAGE_DIR, IMAGE_shapehouseprice)
-Path_shapelandsizedistance = os.path.join(IMAGE_DIR, IMAGE_shapelandsize&distance)
+Path_shapelandsizedistance = os.path.join(IMAGE_DIR, IMAGE_shapelandsizedistance)
 
 #image_dir = os.path.join(os.path.dirname(__file__), "..", "images")
 #cat_img = os.path.join(image_dir, "cat_features.png")
