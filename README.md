@@ -129,7 +129,6 @@ Notable Findings:
 - 🌐 Add Google Maps API for geolocation visualization  
 - 🔍 Integrate multilingual support (e.g., 🇩🇪 German, 🇸🇾 Arabic)  
 - 📈 Update with more recent real estate data  
-- 💡 Auto-interpret predictions via SHAP in Streamlit
 
 ---
 
