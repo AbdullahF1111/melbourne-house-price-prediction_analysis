@@ -100,8 +100,10 @@ Notable Findings:
 - Enter property details (rooms, bathrooms, land size, etc.)
 
 - Instantly get a predicted price 💸
+- 
 ### From My APP
-<img width="960" height="540" alt="Screenshot (16)" src="https://github.com/user-attachments/assets/8317c382-4b8c-4387-8df3-048d85802674" />
+
+<img width="960" height="540" alt="Screenshot (16)" src="https://github.com/user-attachments/assets/e645ba6d-3bae-4644-b6cd-435887032459" />
 
 
 View exploratory visualizations and model insights (SHAP analysis)
