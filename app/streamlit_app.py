@@ -108,7 +108,7 @@ IMAGE_shapehouseprice = "shape houseprice.png"
 IMAGE_shapelandsizedistance = "shape landsize & distance.png"
 Path_categorical = os.path.join(IMAGE_DIR, IMAGE_categorical)
 Path_numerical = os.path.join(IMAGE_DIR, IMAGE_numerical)
-Path_feature = os.path.join(IMAGE_DIR, IMAGE_IMAGE_featureCategorical)
+Path_feature = os.path.join(IMAGE_DIR, IMAGE_feature)
 Path_shapehouseprice = os.path.join(IMAGE_DIR, IMAGE_shapehouseprice)
 Path_shapelandsizedistance = os.path.join(IMAGE_DIR, IMAGE_shapelandsize&distance)
 
