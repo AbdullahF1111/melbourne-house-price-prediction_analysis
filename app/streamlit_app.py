@@ -4,6 +4,7 @@ import numpy as np
 import joblib
 import shap
 import matplotlib.pyplot as plt
+from PIL import Image
 import os
 
 # =========================
@@ -37,10 +38,7 @@ st.set_page_config(page_title="🏠 Melbourne Housing Price Predictor", layout="
 st.title("🏠 Melbourne Housing Price Analysis & Prediction App")
 st.markdown("""
 Welcome to the **Melbourne Housing Price Prediction Dashboard**!  
-This interactive tool allows you to:
-- Input property details to **predict house prices**
-- Explore **feature impacts and correlations**
-- Understand model explainability using **SHAP analysis**
+Use this app to analyze and predict house prices using an **XGBoost model** trained on Melbourne’s property dataset.
 """)
 
 # =========================
@@ -63,7 +61,7 @@ region = st.sidebar.selectbox("Region", [
 ])
 
 # =========================
-# Encode Categorical Inputs
+# Encode Inputs
 # =========================
 input_data = {
     "Rooms": rooms,
@@ -104,79 +102,64 @@ with col1:
     st.metric(label="RMSE", value="≈ 283,941 AUD")
 
 # =========================
-# Load and Show Images Safely
+# Image Display Function
 # =========================
-image_dir = os.path.join(os.path.dirname(__file__), "..", "images")
-
-image_files = {
-    "categorical": "categorical features.png",
-    "numerical": "numerical features.png",
-    "feature": "feature impact.png",
-    "shapehouseprice": "shape houseprice.png",
-    "shapelandsizedistance": "shape landsize & distance.png"
-}
-
-def safe_show_image(path, caption, explanation):
-    """Safely display image or fallback plot with text."""
-    if os.path.exists(path):
-        st.image(path, caption=caption, use_container_width=True)
+def safe_show_image(file_name, caption, explanation):
+    """
+    Safely display an image using PIL to ensure Streamlit Cloud compatibility.
+    """
+    image_path = os.path.join(os.path.dirname(__file__), "..", "images", file_name)
+    try:
+        img = Image.open(image_path)
+        st.image(img, caption=caption, use_container_width=True)
         st.caption(explanation)
-    else:
-        st.warning(f"⚠️ Image not found: {os.path.basename(path)} — showing placeholder.")
+    except FileNotFoundError:
+        st.warning(f"⚠️ Image not found: {file_name}")
         fig, ax = plt.subplots()
-        ax.text(0.5, 0.5, "Image Not Found", fontsize=16, ha='center', va='center')
+        ax.text(0.5, 0.5, "Image Missing", fontsize=16, ha="center", va="center")
         ax.axis("off")
         st.pyplot(fig)
         st.caption(explanation)
+    except Exception as e:
+        st.error(f"⚠️ Could not display {file_name}: {e}")
 
 # =========================
-# Analytical Visualizations Section
+# EDA Section
 # =========================
 st.markdown("## 📈 Exploratory Data Analysis (EDA)")
 
 st.markdown("Below are visual insights that explain how various features relate to house prices in Melbourne:")
 
-# --- Numerical relationships
-st.markdown("### 🔹 Numerical Features and Price Relationships")
 safe_show_image(
-    os.path.join(image_dir, image_files["numerical"]),
+    "numerical features.png",
     caption="Relationships Between Numerical Features and House Price",
-    explanation="This figure shows how price correlates with Landsize, Distance, Rooms, and Bathrooms. "
-                "Generally, larger landsize and more rooms increase the price, while distance from city lowers it."
+    explanation="This figure shows correlations between Landsize, Rooms, Bathrooms, and Distance with price."
 )
 
-# --- SHAP & Feature impact
-st.markdown("### 🔹 SHAP Value & Feature Importance Analysis")
 col1, col2 = st.columns(2)
 with col1:
     safe_show_image(
-        os.path.join(image_dir, image_files["shapelandsizedistance"]),
-        caption="Landsize and Distance SHAP Analysis",
-        explanation="This visualization shows the SHAP values of Landsize and Distance. "
-                    "Larger Landsize contributes positively, while longer distances reduce predicted prices."
+        "shape landsize & distance.png",
+        caption="Landsize & Distance SHAP Analysis",
+        explanation="Larger landsize tends to increase prices, while greater distance decreases them."
     )
 with col2:
     safe_show_image(
-        os.path.join(image_dir, image_files["feature"]),
+        "feature impact.png",
         caption="Categorical Features Impact",
-        explanation="SHAP summary showing how region and property type influence the prediction."
+        explanation="Shows how property type and region contribute to price variation."
     )
 
-# --- Categorical distributions
-st.markdown("### 🔹 Categorical Features Analysis")
 safe_show_image(
-    os.path.join(image_dir, image_files["categorical"]),
-    caption="Categorical Feature Distribution and Their Effect on Price",
-    explanation="This plot illustrates how different property types and regions contribute to the price distribution."
+    "categorical features.png",
+    caption="Categorical Feature Distribution",
+    explanation="Shows the distribution of prices across different property types and regions."
 )
 
-# --- House price shape distribution
-st.markdown("### 🔹 Price Distribution Overview")
 safe_show_image(
-    os.path.join(image_dir, image_files["shapehouseprice"]),
+    "shape houseprice.png",
     caption="Distribution of Melbourne House Prices",
-    explanation="This figure represents the distribution of house prices — showing that most properties "
-                "fall within the median range, while a few luxury properties skew the upper tail."
+    explanation="Displays the skewed distribution of house prices with few high-end outliers."
 )
 
 # =========================
