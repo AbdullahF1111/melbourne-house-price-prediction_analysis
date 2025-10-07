@@ -54,7 +54,6 @@ property_type = st.sidebar.selectbox("Property Type", ["House", "Unit", "Townhou
 region = st.sidebar.selectbox("Region", [
     "Northern Metropolitan",
     "South-Eastern Metropolitan",
-    "Southern Metropolitan",
     "Western Metropolitan"
 ])
 
@@ -71,7 +70,6 @@ input_data = {
     "Type_u": 1 if property_type == "Unit" else 0,
     "Regionname_Northern Metropolitan": 1 if region == "Northern Metropolitan" else 0,
     "Regionname_South-Eastern Metropolitan": 1 if region == "South-Eastern Metropolitan" else 0,
-    "Regionname_Southern Metropolitan": 1 if region == "Southern Metropolitan" else 0,
     "Regionname_Western Metropolitan": 1 if region == "Western Metropolitan" else 0,
 }
 
@@ -102,24 +100,36 @@ with col1:
 # =========================
 # Load and Show Images Safely
 # =========================
-image_dir = os.path.join(os.path.dirname(__file__), "..", "images")
-cat_img = os.path.join(image_dir, "cat_features.png")
-land_img = os.path.join(image_dir, "ca9df0c7-b8a3-4628-a6fe-b763c34093ca.png")
-impact_img = os.path.join(image_dir, "f9a7203b-0e6e-493b-8e9d-be60e9c32106.png")
+IMAGE_DIR = "images"
+IMAGE_categorical = "categorical features.png"
+IMAGE_numerical = "numerical features.png"
+IMAGE_feature = "feature impact.png"
+IMAGE_shapehouseprice = "shape houseprice.png"
+IMAGE_shapelandsize&distance = "shape landsize & distance.png"
+Path_categorical = os.path.join(IMAGE_DIR, IMAGE_categorical)
+Path_numerical = os.path.join(IMAGE_DIR, IMAGE_numerical)
+Path_feature = os.path.join(IMAGE_DIR, IMAGE_IMAGE_featureCategorical)
+Path_shapehouseprice = os.path.join(IMAGE_DIR, IMAGE_shapehouseprice)
+Path_shapelandsize&distance = os.path.join(IMAGE_DIR, IMAGE_shapelandsize&distance)
+
+#image_dir = os.path.join(os.path.dirname(__file__), "..", "images")
+#cat_img = os.path.join(image_dir, "cat_features.png")
+#land_img = os.path.join(image_dir, "ca9df0c7-b8a3-4628-a6fe-b763c34093ca.png")
+#impact_img = os.path.join(image_dir, "f9a7203b-0e6e-493b-8e9d-be60e9c32106.png")
 
 with col2:
-    if os.path.exists(cat_img):
-        st.image(cat_img, caption="Categorical Feature Analysis", use_container_width=True)
+    if os.path.exists(Path_categorical):
+        st.image(Path_categorical, caption="Categorical Feature Analysis", use_container_width=True)
     else:
         st.info("Categorical feature image not found.")
 
 st.markdown("### 📉 Exploratory Analysis")
 col1, col2 = st.columns(2)
 
-if os.path.exists(land_img):
-    col1.image(land_img, caption="Landsize vs SHAP Values", use_container_width=True)
-if os.path.exists(impact_img):
-    col2.image(impact_img, caption="Categorical Features Impact", use_container_width=True)
+if os.path.exists(Path_shapelandsize&distance):
+    col1.image(Path_shapelandsize&distance, caption="Landsize vs SHAP Values", use_container_width=True)
+if os.path.exists(Path_feature):
+    col2.image(Path_feature, caption="Categorical Features Impact", use_container_width=True)
 
 # =========================
 # SHAP Explainability
