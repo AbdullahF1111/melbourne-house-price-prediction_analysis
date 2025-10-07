@@ -148,3 +148,18 @@ git clone https://github.com/yourusername/real-estate-price-prediction.git
 cd real-estate-price-prediction
 pip install -r requirements.txt
 streamlit run app/streamlit_app.py
+
+
+## 🖼️ About The Images Folder
+
+- The project includes an images/ folder that contains static visualizations used in the Streamlit app’s Exploratory Data Analysis (EDA) and Model Explainability sections.
+These images were generated during the data analysis phase and are automatically loaded by the app.
+
+| File                            | Description                                                   |
+| ------------------------------- | ------------------------------------------------------------- |
+| `numerical features.png`        | Correlations between numerical variables and house prices     |
+| `categorical features.png`      | Comparison of price distributions by region and property type |
+| `feature impact.png`            | Overall SHAP feature importance ranking                       |
+| `shape landsize & distance.png` | SHAP analysis showing how distance and land size affect price |
+| `shape houseprice.png`          | Distribution of predicted house prices across the dataset     |
+
