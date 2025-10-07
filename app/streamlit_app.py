@@ -4,7 +4,6 @@ import numpy as np
 import joblib
 import shap
 import matplotlib.pyplot as plt
-from PIL import Image
 import os
 
 # =========================
@@ -102,64 +101,51 @@ with col1:
     st.metric(label="RMSE", value="≈ 283,941 AUD")
 
 # =========================
-# Image Display Function
-# =========================
-def safe_show_image(file_name, caption, explanation):
-    """
-    Safely display an image using PIL to ensure Streamlit Cloud compatibility.
-    """
-    image_path = os.path.join(os.path.dirname(__file__), "..", "images", file_name)
-    try:
-        img = Image.open(image_path)
-        st.image(img, caption=caption, use_column_width=True)
-        st.caption(explanation)
-    except FileNotFoundError:
-        st.warning(f"⚠️ Image not found: {file_name}")
-        fig, ax = plt.subplots()
-        ax.text(0.5, 0.5, "Image Missing", fontsize=16, ha="center", va="center")
-        ax.axis("off")
-        st.pyplot(fig)
-        st.caption(explanation)
-    except Exception as e:
-        st.error(f"⚠️ Could not display {file_name}: {e}")
-
-# =========================
-# EDA Section
+# EDA & Image Display
 # =========================
 st.markdown("## 📈 Exploratory Data Analysis (EDA)")
-
 st.markdown("Below are visual insights that explain how various features relate to house prices in Melbourne:")
 
-safe_show_image(
+image_dir = os.path.join(os.path.dirname(__file__), "..", "images")
+
+def show_image(image_name, caption, explanation):
+    image_path = os.path.join(image_dir, image_name)
+    if os.path.exists(image_path):
+        st.image(image_path, caption=caption, use_column_width=True)
+        st.caption(explanation)
+    else:
+        st.warning(f"⚠️ Could not find image: {image_name}")
+
+show_image(
     "numerical features.png",
-    caption="Relationships Between Numerical Features and House Price",
-    explanation="This figure shows correlations between Landsize, Rooms, Bathrooms, and Distance with price."
+    "Relationships Between Numerical Features and House Price",
+    "This figure shows correlations between Landsize, Rooms, Bathrooms, and Distance with price."
 )
 
 col1, col2 = st.columns(2)
 with col1:
-    safe_show_image(
+    show_image(
         "shape landsize & distance.png",
-        caption="Landsize & Distance SHAP Analysis",
-        explanation="Larger landsize tends to increase prices, while greater distance decreases them."
+        "Landsize & Distance SHAP Analysis",
+        "Larger landsize tends to increase prices, while greater distance decreases them."
     )
 with col2:
-    safe_show_image(
+    show_image(
         "feature impact.png",
-        caption="Categorical Features Impact",
-        explanation="Shows how property type and region contribute to price variation."
+        "Categorical Features Impact",
+        "Shows how property type and region contribute to price variation."
     )
 
-safe_show_image(
+show_image(
     "categorical features.png",
-    caption="Categorical Feature Distribution",
-    explanation="Shows the distribution of prices across different property types and regions."
+    "Categorical Feature Distribution",
+    "Shows the distribution of prices across different property types and regions."
 )
 
-safe_show_image(
+show_image(
     "shape houseprice.png",
-    caption="Distribution of Melbourne House Prices",
-    explanation="Displays the skewed distribution of house prices with few high-end outliers."
+    "Distribution of Melbourne House Prices",
+    "Displays the skewed distribution of house prices with few high-end outliers."
 )
 
 # =========================
@@ -170,12 +156,10 @@ try:
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_new)
 
-    # Create static bar plot instead of interactive
     st.write("Feature Importance (SHAP Summary):")
     shap.summary_plot(shap_values, X_new, plot_type="bar", show=False)
     fig = plt.gcf()
     st.pyplot(fig, bbox_inches="tight")
     plt.clf()
-except Exception as e:
+except Exception:
     st.info("SHAP visualization skipped (requires local model compatibility).")
-
