@@ -126,8 +126,8 @@ with col2:
 st.markdown("### 📉 Exploratory Analysis")
 col1, col2 = st.columns(2)
 
-if os.path.exists(Path_shapelandsizedistance):
-    col1.image(Path_shapelandsizedistance, caption="Landsize vs SHAP Values", use_container_width=True)
+#if os.path.exists(Path_shapelandsizedistance):
+   # col1.image(Path_shapelandsizedistance, caption="Landsize vs SHAP Values", use_container_width=True)
 if os.path.exists(Path_feature):
     col2.image(Path_feature, caption="Categorical Features Impact", use_container_width=True)
 
