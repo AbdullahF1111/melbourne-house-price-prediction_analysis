@@ -22,8 +22,8 @@ except Exception as e:
 training_columns = [
     'Rooms', 'Bathroom', 'Car', 'Landsize', 'Distance',
     'Type_t', 'Type_u',
-    'Regionname_Northern Metropolitan',
-    'Regionname_Southern Metropolitan',
+    'Regionname_northern Metropolitan',
+    'Regionname_South-Eastern Metropolitan',
     'Regionname_Western Metropolitan'
 ]
 
@@ -64,8 +64,8 @@ new_data = {
     "Distance": distance,
     "Type_t": 1 if property_type == "Townhouse" else 0,
     "Type_u": 1 if property_type == "Unit" else 0,
-    "Regionname_Northern Metropolitan": 1 if region == "Northern Metropolitan" else 0,
-    "Regionname_Southern Metropolitan": 1 if region == "Southern Metropolitan" else 0,
+    "Regionname_South-Eastern Metropolitan": 1 if region == "Regionname_South-Eastern Metropolitan" else 0,
+    "Regionname_northern Metropolitan": 1 if region == "Southern Metropolitan" else 0,
     "Regionname_Western Metropolitan": 1 if region == "Western Metropolitan" else 0,
 }
 
