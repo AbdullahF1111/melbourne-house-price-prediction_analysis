@@ -1,9 +1,9 @@
+streamlit==1.38.0
 pandas
 numpy
 matplotlib
 seaborn
-missingno
-scikit-learn
-joblib
-streamlit
 xgboost
+scikit-learn
+shap
+joblib
