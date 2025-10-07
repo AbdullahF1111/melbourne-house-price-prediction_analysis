@@ -104,10 +104,19 @@ Notable Findings:
   - 🔗 Landsize × Distance: large land near city = high value
   - 🔗 Rooms × Type: room effect depends on property type
 
-### 6️⃣ Deployment (Optional)
-- ⚙️ Streamlit app (coming soon):
-  - User inputs house details → predicted price 💸
+### 6️⃣ 🚀 Deployment & Usage
+🌐 Live Streamlit App
 
+- You can explore the interactive version of this project on Streamlit Cloud:
+👉 Melbourne House Price Prediction App
+
+- What it does:
+
+- Enter property details (rooms, bathrooms, land size, etc.)
+
+- Instantly get a predicted price 💸
+
+View exploratory visualizations and model insights (SHAP analysis)
 ---
 
 ## 💡 Key Insights
