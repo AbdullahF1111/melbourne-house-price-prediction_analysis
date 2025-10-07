@@ -111,7 +111,7 @@ def safe_show_image(file_name, caption, explanation):
     image_path = os.path.join(os.path.dirname(__file__), "..", "images", file_name)
     try:
         img = Image.open(image_path)
-        st.image(img, caption=caption, use_container_width=True)
+        st.image(img, caption=caption, use_column_width=True)
         st.caption(explanation)
     except FileNotFoundError:
         st.warning(f"⚠️ Image not found: {file_name}")
@@ -169,8 +169,13 @@ st.markdown("## 🧠 Model Explainability (SHAP Analysis)")
 try:
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_new)
+
+    # Create static bar plot instead of interactive
     st.write("Feature Importance (SHAP Summary):")
     shap.summary_plot(shap_values, X_new, plot_type="bar", show=False)
-    st.pyplot(bbox_inches="tight")
-except Exception:
+    fig = plt.gcf()
+    st.pyplot(fig, bbox_inches="tight")
+    plt.clf()
+except Exception as e:
     st.info("SHAP visualization skipped (requires local model compatibility).")
+
