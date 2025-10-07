@@ -138,4 +138,4 @@ Notable Findings:
 git clone https://github.com/yourusername/real-estate-price-prediction.git
 cd real-estate-price-prediction
 pip install -r requirements.txt
-streamlit run app/main.py
+streamlit run app/streamlit_app.py
