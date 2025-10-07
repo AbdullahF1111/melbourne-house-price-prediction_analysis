@@ -101,6 +101,9 @@ Notable Findings:
 
 - Instantly get a predicted price 💸
 
+<img width="1920" height="1080" alt="Screenshot (15)" src="https://github.com/user-attachments/assets/e693b957-754d-4a94-86ae-2770f725077d" />
+
+
 View exploratory visualizations and model insights (SHAP analysis)
 ---
 
