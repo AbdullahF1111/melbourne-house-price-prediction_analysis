@@ -108,7 +108,7 @@ Notable Findings:
 🌐 Live Streamlit App
 
 - You can explore the interactive version of this project on Streamlit Cloud:
-👉 Melbourne House Price Prediction App
+- 👉 [Melbourne House Price Prediction App](https://melbourne-house-price-predictionanalysis-qn43zobz8e3wvtlmlxqnw.streamlit.app/#6178c42d)
 
 - What it does:
 
